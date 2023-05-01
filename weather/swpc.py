@@ -12,14 +12,14 @@ class Direction(Enum):
     South = 1
 
 
-def aurora_forcast(hemisphere: Direction) -> BytesIO:
+def aurora_forecast(hemisphere: Direction) -> BytesIO:
     """
-    Get image of the Aurora forcast.
+        Get image of the Aurora forecast.
 
-    Returns
-    -------
-    Image
-        The image sequence as a WEBP gotten from the SWPC.
+        Returns
+        -------
+        Image
+            The image sequence as a WEBP gotten from the SWPC.
 
     """
     match hemisphere:
@@ -46,12 +46,30 @@ def tonight_aurora_viewline() -> BytesIO:
 
 
 def tomorrow_aurora_viewline() -> BytesIO:
+    """
+        Get image of tomorrow's Aurora forecast.
+
+        Returns
+        -------
+        Image
+            The image sequence as a WEBP gotten from the SWPC.
+
+    """
     response = requests.get("https://services.swpc.noaa.gov/experimental/images/aurora_dashboard"
                             "/tomorrow_nights_static_viewline_forecast.png")
     return BytesIO(response.content)
 
 
 def cme_gif() -> BytesIO:
+    """
+        Get image of the coronal mass ejection.
+
+        Returns
+        -------
+        Image
+            The image sequence as a WEBP gotten from the SWPC.
+
+    """
     response = requests.get("https://services.swpc.noaa.gov/products/animations/lasco-c3.json")
     images = []
     for i in response.json():

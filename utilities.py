@@ -2,8 +2,6 @@ import guilded
 from guilded.ext import commands
 from datetime import datetime
 
-# todo: doc string
-
 
 async def send_image_hook(ctx, title: str, file):
     embed = guilded.Embed(title=title,

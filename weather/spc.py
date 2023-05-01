@@ -9,12 +9,12 @@ NWS_LOGO: str = "https://www.spc.noaa.gov/nwscwi/nwsright.jpg"
 
 class ConvOutlookType(Enum):
     """
-    Outlook type:
-    Categorical = 0
-    Tornado = 1
-    Wind = 2
-    Hail = 3
-    Probabilistic = 4
+        Outlook type:
+        Categorical = 0
+        Tornado = 1
+        Wind = 2
+        Hail = 3
+        Probabilistic = 4
     """
     Categorical = 0
     Tornado = 1
@@ -28,25 +28,25 @@ class FireOutlookType(Enum):
         Outlook type:
         Categorical = 0
         DryT/LowRH/Wind = 1
-        """
+    """
     Categorical = 0
     DryT = 1  # DryT/LowRH/Wind
 
 
 def day1_conv_otlk(outlook_type: ConvOutlookType = ConvOutlookType.Categorical) -> BytesIO:
     """
-    Get gif of the Day 1 Convective Outlook.
+        Get gif of the Day 1 Convective Outlook.
 
-    Parameters
-    ----------
-    outlook_type : ConvOutlookType, optional
-        The outlook type to get. Only valid options are: Categorical, Tornado, Wind, and Hail.
-        The default is ConvOutlookType.Categorical.
+        Parameters
+        ----------
+        outlook_type : ConvOutlookType, optional
+            The outlook type to get. Only valid options are: Categorical, Tornado, Wind, and Hail.
+            The default is ConvOutlookType.Categorical.
 
-    Returns
-    -------
-    Image
-        The image gotten from the SPC. Is the NWS logo when an error is encountered.
+        Returns
+        -------
+        Image
+            The image gotten from the SPC. Is the NWS logo when an error is encountered.
 
     """
     match outlook_type:
@@ -66,18 +66,18 @@ def day1_conv_otlk(outlook_type: ConvOutlookType = ConvOutlookType.Categorical) 
 
 def day2_conv_otlk(outlook_type: ConvOutlookType = ConvOutlookType.Categorical) -> BytesIO:
     """
-    Get gif of the Day 2 Convective Outlook.
+        Get gif of the Day 2 Convective Outlook.
 
-    Parameters
-    ----------
-    outlook_type : ConvOutlookType, optional
-        The outlook type to get. Only valid options are: Categorical, Tornado, Wind, and Hail.
-        The default is ConvOutlookType.Categorical.
+        Parameters
+        ----------
+        outlook_type : ConvOutlookType, optional
+            The outlook type to get. Only valid options are: Categorical, Tornado, Wind, and Hail.
+            The default is ConvOutlookType.Categorical.
 
-    Returns
-    -------
-    Image
-        The image gotten from the SPC. Is the NWS logo when an error is encountered.
+        Returns
+        -------
+        Image
+            The image gotten from the SPC. Is the NWS logo when an error is encountered.
 
     """
     match outlook_type:
@@ -97,18 +97,18 @@ def day2_conv_otlk(outlook_type: ConvOutlookType = ConvOutlookType.Categorical) 
 
 def day3_conv_otlk(outlook_type: ConvOutlookType = ConvOutlookType.Categorical) -> BytesIO:
     """
-    Get gif of the Day 3 Convective Outlook.
+        Get gif of the Day 3 Convective Outlook.
 
-    Parameters
-    ----------
-    outlook_type : ConvOutlookType, optional
-        The outlook type to get. Only valid options are: Categorical, and Probabilistic.
-        The default is ConvOutlookType.Categorical.
+        Parameters
+        ----------
+        outlook_type : ConvOutlookType, optional
+            The outlook type to get. Only valid options are: Categorical, and Probabilistic.
+            The default is ConvOutlookType.Categorical.
 
-    Returns
-    -------
-    Image
-        The image gotten from the SPC. Is the NWS logo when an error is encountered.
+        Returns
+        -------
+        Image
+            The image gotten from the SPC. Is the NWS logo when an error is encountered.
 
     """
     match outlook_type:
@@ -125,12 +125,12 @@ def day3_conv_otlk(outlook_type: ConvOutlookType = ConvOutlookType.Categorical) 
 
 def day48_conv_otlk() -> BytesIO:
     """
-    Get gif of the Day 4-8 Convective Outlook.
+        Get gif of the Day 4-8 Convective Outlook.
 
-    Returns
-    -------
-    Image
-        The image gotten from the SPC.
+        Returns
+        -------
+        Image
+            The image gotten from the SPC.
 
     """
     response = requests.get("https://www.spc.noaa.gov/products/exper/day4-8/day48prob.gif")
@@ -139,12 +139,12 @@ def day48_conv_otlk() -> BytesIO:
 
 def day1_fire_otlk() -> BytesIO:
     """
-    Get gif of the Day 1 Fire Outlook.
+        Get gif of the Day 1 Fire Outlook.
 
-    Returns
-    -------
-    Image
-        The image gotten from the SPC.
+        Returns
+        -------
+        Image
+            The image gotten from the SPC.
 
     """
     response = requests.get("https://www.spc.noaa.gov/products/fire_wx/day1otlk_fire.gif")
@@ -180,7 +180,7 @@ def day38_fire_otlk(outlook_type: FireOutlookType = FireOutlookType.Categorical)
         Image
             The image gotten from the SPC. Is the NWS logo when an error is encountered.
 
-        """
+    """
     match outlook_type:
         case outlook_type.Categorical:
             response = requests.get("https://www.spc.noaa.gov/products/exper/fire_wx/imgs/day38otlk_fire.gif")

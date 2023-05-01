@@ -4,8 +4,6 @@ import weather
 import utilities
 from weather.swpc import Direction
 
-# TODO: doc strings for all functions
-
 
 class SWPC(commands.Cog):
     def __init__(self, bot):
@@ -39,14 +37,14 @@ class SWPC(commands.Cog):
     @aurora_forecast.command(name="north")
     async def aurora_north(self, ctx):
         reply = await ctx.reply("Generating Animation...")
-        file = guilded.File(weather.swpc.aurora_forcast(Direction.North), filename="image.webp")
+        file = guilded.File(weather.swpc.aurora_forecast(Direction.North), filename="image.webp")
         await utilities.send_image_hook(ctx, "Aurora Forecast: North", file)
         await reply.edit(content="Animation complete.")
 
     @aurora_forecast.command(name="south")
     async def aurora_south(self, ctx):
         reply = await ctx.reply("Generating Animation...")
-        file = guilded.File(weather.swpc.aurora_forcast(Direction.South), filename="image.webp")
+        file = guilded.File(weather.swpc.aurora_forecast(Direction.South), filename="image.webp")
         await utilities.send_image_hook(ctx, "Aurora Forecast: South", file)
         await reply.edit(content="Animation complete.")
 
