@@ -36,21 +36,12 @@ class SWPC(commands.Cog):
 
     @aurora_forecast.command(name="north")
     async def aurora_north(self, ctx):
-        reply = await ctx.reply("Generating Animation...")
-        file = guilded.File(weather.swpc.aurora_forecast(Direction.North), filename="image.webp")
-        await utilities.send_image_hook(ctx, "Aurora Forecast: North", file)
-        await reply.edit(content="Animation complete.")
+        await weather.swpc.aurora_forecast(Direction.North, ctx)
 
     @aurora_forecast.command(name="south")
     async def aurora_south(self, ctx):
-        reply = await ctx.reply("Generating Animation...")
-        file = guilded.File(weather.swpc.aurora_forecast(Direction.South), filename="image.webp")
-        await utilities.send_image_hook(ctx, "Aurora Forecast: South", file)
-        await reply.edit(content="Animation complete.")
+        await weather.swpc.aurora_forecast(Direction.South, ctx)
 
     @swpc.command(name="cme")
     async def cme_gif(self, ctx):
-        reply = await ctx.reply("Generating Animation...")
-        file = guilded.File(weather.swpc.cme_gif(), filename="image.webp")
-        await utilities.send_image_hook(ctx, "Coronal Mass Ejections", file)
-        await reply.edit(content="Animation complete.")
+        await weather.swpc.cme_gif(ctx)

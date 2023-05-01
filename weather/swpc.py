@@ -3,6 +3,7 @@ from io import BytesIO
 from enum import Enum
 from PIL import Image
 
+import utilities
 
 NWS_LOGO: str = "https://www.spc.noaa.gov/nwscwi/nwsright.jpg"
 
@@ -12,7 +13,7 @@ class Direction(Enum):
     South = 1
 
 
-def aurora_forecast(hemisphere: Direction) -> BytesIO:
+async def aurora_forecast(hemisphere: Direction, ctx):
     """
         Get image of the Aurora forecast.
 
@@ -32,11 +33,8 @@ def aurora_forecast(hemisphere: Direction) -> BytesIO:
     response = requests.get(url)
     images = []
     for i in response.json():
-        images.append(Image.open(BytesIO(requests.get("https://services.swpc.noaa.gov" + i['url']).content),
-                                 formats=('JPEG', 'PNG')))
-    seq_bytes = BytesIO()
-    images[0].save(seq_bytes, save_all=True, append_images=images[1::], format='WEBP')
-    return BytesIO(seq_bytes.getvalue())
+        images.append("https://services.swpc.noaa.gov" + i['url'])
+    await utilities.image_fetcher_pool(images, ctx, "Aurora Forecast")
 
 
 def tonight_aurora_viewline() -> BytesIO:
@@ -60,7 +58,7 @@ def tomorrow_aurora_viewline() -> BytesIO:
     return BytesIO(response.content)
 
 
-def cme_gif() -> BytesIO:
+async def cme_gif(ctx):  # in an effort to speed this up i have broken the general flexibility of this
     """
         Get image of the coronal mass ejection.
 
@@ -73,9 +71,5 @@ def cme_gif() -> BytesIO:
     response = requests.get("https://services.swpc.noaa.gov/products/animations/lasco-c3.json")
     images = []
     for i in response.json():
-        images.append(Image.open(BytesIO(requests.get("https://services.swpc.noaa.gov" + i['url']).content),
-                                 formats=('JPEG',)))
-    seq_bytes = BytesIO()
-    images[0].save(seq_bytes, save_all=True, append_images=images[1::], format='WEBP')
-    return BytesIO(seq_bytes.getvalue())
-
+        images.append("https://services.swpc.noaa.gov" + i['url'])
+    await utilities.image_fetcher_pool(images, ctx, "Coronal Mass Ejections")

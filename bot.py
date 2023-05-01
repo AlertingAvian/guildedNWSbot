@@ -28,7 +28,7 @@ async def on_ready():
 
 @bot.command(name="ping")
 async def ping(ctx):
-    await ctx.send('Pong.')
+    await ctx.reply('Pong.')
 
 load_dotenv()
 bot.run(os.environ['TOKEN'])
