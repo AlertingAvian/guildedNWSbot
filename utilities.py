@@ -9,7 +9,7 @@ from io import BytesIO
 from PIL import Image
 
 load_dotenv()
-avatar_url = os.environ['avatar']
+avatar_url = os.environ['AVATAR']
 
 async def send_image_hook(ctx, title: str, file):
     embed = guilded.Embed(title=title,
